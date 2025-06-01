@@ -1,2 +1,3 @@
 .env
 oc_crowd_data.db
+node_modules
