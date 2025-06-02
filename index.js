@@ -62,6 +62,8 @@ app.post("/data", (req, res) => {
     typeof position.Y !== "number" ||
     typeof position.Z !== "number"
   ) {
+    return console.error("Payload validation failed:", req.body);
+
     return res.status(400).json({ error: "Invalid payload format" });
   }
 
