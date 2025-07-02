@@ -2,8 +2,12 @@
   "name": "oc_crowd_data",
   "dependencies": {
     "better-sqlite3": "^11.10.0",
+    "canvas": "^3.1.0",
+    "csv-parse": "^5.6.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "express-rate-limit": "^7.5.0"
+    "express-rate-limit": "^7.5.0",
+    "js-priority-queue": "^0.1.5",
+    "sharp": "^0.34.2"
   }
 }

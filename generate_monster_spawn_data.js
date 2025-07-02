@@ -31,6 +31,8 @@ function isClose(pos1, pos2, epsilon = POSITION_EPSILON) {
 const groupedByName = {};
 
 for (const row of rows) {
+  if (!row.name.startsWith("Crescent")) continue;
+
   const { name, pos_x, pos_y, pos_z, count } = row;
   if (!groupedByName[name]) groupedByName[name] = [];
 
@@ -57,6 +59,7 @@ for (const row of rows) {
 let csv = ["name,submissions,x,y,z"];
 
 for (const [name, entries] of Object.entries(groupedByName)) {
+  if (!name.startsWith("Crescent")) continue;
   for (const entry of entries) {
     const { position, count } = entry;
     csv.push(

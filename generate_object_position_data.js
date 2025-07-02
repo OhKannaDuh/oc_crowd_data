@@ -4,7 +4,7 @@ const Database = require("better-sqlite3");
 const db = new Database("oc_crowd_data.db");
 
 // Tolerance in position to consider two points "the same"
-const POSITION_EPSILON = 0.05;
+const POSITION_EPSILON = 5;
 
 const stmt = db.prepare(`
   SELECT 
