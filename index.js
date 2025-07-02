@@ -33,6 +33,7 @@ db.prepare(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         identifier INTEGER NOT NULL,
+        level INTEGER NOT NULL,
         pos_x REAL NOT NULL,
         pos_y REAL NOT NULL,
         pos_z REAL NOT NULL,
@@ -51,11 +52,12 @@ app.use((req, res, next) => {
 });
 
 app.post("/monster_spawn", (req, res) => {
-  const { name, identifier, position } = req.body;
+  const { name, identifier, level, position } = req.body;
 
   if (
     typeof name !== "string" ||
     typeof identifier !== "number" ||
+    typeof level !== "number" ||
     typeof position !== "object" ||
     typeof position.X !== "number" ||
     typeof position.Y !== "number" ||
@@ -66,14 +68,15 @@ app.post("/monster_spawn", (req, res) => {
   }
 
   const stmt = db.prepare(`
-    INSERT INTO monster_spawns (name, identifier, pos_x, pos_y, pos_z, timestamp)
-    VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO monster_spawns (name, identifier, level, pos_x, pos_y, pos_z, timestamp)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
   `);
 
   const timestamp = new Date().toISOString();
   const info = stmt.run(
     name,
     identifier,
+    level,
     position.X,
     position.Y,
     position.Z,

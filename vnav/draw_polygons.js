@@ -84,19 +84,18 @@ const monster_levels = {
 
 
 const blacklist_filter = [
-  "Armor",
-  "Bomb",
-  "Caoineag",
-  "Dhruva",
-  "Dullahan",
-  "Echos",
-  "Fool",
-  "Geshunpest",
-  "Ghost",
-  "Gourmand",
-  "Mimic",
-  "Mousse",
-  "Troubadour",
+  // "Armor",
+  // "Bomb",
+  // "Caoineag",
+  // "Dhruva",
+  // "Dullahan",
+  // "Fool",
+  // "Geshunpest",
+  // "Ghost",
+  // "Gourmand",
+  // "Mimic",
+  // "Mousse",
+  // "Troubadour",
 ];
 
 // Map world coords (x,z) to image coords (pixels)
@@ -190,7 +189,8 @@ async function main() {
   // Group positions by spawn name, filter for Crescent spawns
   const groups = {};
   for (const row of rows) {
-    if (!row.name.startsWith("Crescent")) continue;
+    // if (!row.name.startsWith("Crescent")) continue;
+    if (row.pos_y <= -50) continue; // Skip positions below -50
     if (blacklist_filter.some(term => row.name.includes(term))) continue;
 
     if (!groups[row.name]) groups[row.name] = [];
@@ -230,6 +230,10 @@ for (const [name, positions] of Object.entries(groups)) {
     const stroke = `rgba(${Math.floor(r / 2)},${Math.floor(g / 2)},${Math.floor(b / 2)},${config.polygonStrokeAlpha})`;
 
     const level = monster_levels[name] || 99;
+    if (level == 99) {
+      console
+      .log(name)
+    }
 
         const centroid = hullPoints.reduce(
       (acc, p) => [acc[0] + p[0], acc[1] + p[1]],
